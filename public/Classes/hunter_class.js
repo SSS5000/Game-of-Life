@@ -1,4 +1,4 @@
-class Hunter {
+module.exports = class Hunter {
     constructor(i, j, index) {
         this.i = i;
         this.j = j;

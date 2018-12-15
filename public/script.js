@@ -1,53 +1,48 @@
+var Grass = require("./Classes/grass_class");
+var GrassEater = require("./Classes/grassEater_class");
+var Predator = require("./Classes/predator_class");
+var Lion = require("./Classes/lion_class");
+var Hunter = require("./Classes/hunter_class");
 
-
-var matrix = [];
-var side = 10;
-// matrix = [
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 4, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0]
-// ];
+// var matrix = [];
+// var side = 10;
 
 function setup() {
 
-    var n = 80;
-    var lion = 0;
-    for (var i = 0; i < n; i++) {
-        matrix[i] = [];
-        for (var j = 0; j < n; j++) {
-            if (lion != 0) {
-                matrix[i][j] = random([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3]);
-            } else {
-                matrix[i][j] = random([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4]);
-                if (matrix[i][j] == 4) {
-                    lion++;
-                }
-            }
+    // var n = 80;
+    // var lion = 0;
+    // for (var i = 0; i < n; i++) {
+    //     matrix[i] = [];
+    //     for (var j = 0; j < n; j++) {
+    //         if (lion != 0) {
+    //             matrix[i][j] = random([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3]);
+    //         } else {
+    //             matrix[i][j] = random([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4]);
+    //             if (matrix[i][j] == 4) {
+    //                 lion++;
+    //             }
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
-    matrix[Math.round(random(matrix.length))][0] = 5
+    // matrix[Math.round(random(matrix.length))][0] = 5
 
-    for (var i = 0; i < matrix.length; i++) {
-        for (var j = 0; j < matrix[i].length; j++) {
-            if (matrix[i][j] == 1) {
-                matrix[i][j] = new Grass(i, j, 1);
-            } else if (matrix[i][j] == 2) {
-                matrix[i][j] = new GrassEater(i, j, 2);
-            } else if (matrix[i][j] == 3) {
-                matrix[i][j] = new Predator(i, j, 3);
-            } else if (matrix[i][j] == 4) {
-                matrix[i][j] = new Lion(i, j, 4);
-            } else if (matrix[i][j] == 5) {
-                matrix[i][j] = new Hunter(i, j, 5);
-            }
-        }
-    }
+    // for (var i = 0; i < matrix.length; i++) {
+    //     for (var j = 0; j < matrix[i].length; j++) {
+    //         if (matrix[i][j] == 1) {
+    //             matrix[i][j] = new Grass(i, j, 1);
+    //         } else if (matrix[i][j] == 2) {
+    //             matrix[i][j] = new GrassEater(i, j, 2);
+    //         } else if (matrix[i][j] == 3) {
+    //             matrix[i][j] = new Predator(i, j, 3);
+    //         } else if (matrix[i][j] == 4) {
+    //             matrix[i][j] = new Lion(i, j, 4);
+    //         } else if (matrix[i][j] == 5) {
+    //             matrix[i][j] = new Hunter(i, j, 5);
+    //         }
+    //     }
+    // }
 
     frameRate(5);
     createCanvas(matrix[0].length * side + 1, matrix.length * side + 1);
@@ -55,9 +50,6 @@ function setup() {
 
 
 }
-
-console.log(matrix);
-
 
 
 
@@ -107,7 +99,7 @@ function draw() {
                 }
             }
         }
-    }  // Grass
+    }  
 
 
     for (var i = 0; i < matrix.length; i++) {

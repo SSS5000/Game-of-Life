@@ -1,4 +1,4 @@
-class Lion {
+module.exports = class Lion {
     constructor(i, j, index) {
         this.i = i;
         this.j = j;
