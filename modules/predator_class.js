@@ -1,4 +1,4 @@
-var matrix = require("./matrix");
+
 module.exports = class Predator {
     constructor(i, j, index) {
         this.i = i;
@@ -22,7 +22,12 @@ module.exports = class Predator {
         ];
     }
 
-    chooseCell(num,num2) {
+    random(arr) {
+        var r = Math.floor(Math.random() * (arr.length));
+        return arr[r];
+    }
+
+    chooseCell(num,num2,matrix) {
         this.getNewCoordinates();
         var found = [];
         for (var k in this.directions) {
@@ -39,13 +44,10 @@ module.exports = class Predator {
         return found;
     }
 
-    move() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    move(matrix) {
+ 
         
-        var newCell = random(this.chooseCell(0,1));
+        var newCell = this.random(this.chooseCell(0,1,matrix));
 
         if (newCell) {
             this.energy--;
@@ -59,13 +61,10 @@ module.exports = class Predator {
         }
     }
 
-    eat() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    eat(matrix) {
         
-        var newCell = random(this.chooseCell(2,2));
+        var newCell = this.random(this.chooseCell(2,2,matrix));
+
         this.acted = true;
         if (this.energy == 0) {
             matrix[this.i][this.j] = 0;
@@ -80,17 +79,12 @@ module.exports = class Predator {
             this.i = newI;
             this.energy++;
         } else {
-            this.move();
+            this.move(matrix);
         }
     }
 
-    mul() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
-        
-        var newCell = random(this.chooseCell(0));
+    mul(matrix) {
+        var newCell = this.random(this.chooseCell(0,0,matrix));
 
         if (newCell) {
             var newJ = newCell[0];

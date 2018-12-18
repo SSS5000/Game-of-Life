@@ -1,5 +1,4 @@
 var livingCreature = require("./livingCreature_class");
-var matrix = require("./matrix");
 
 module.exports = class GrassEater extends livingCreature {
     constructor(i, j, index) {
@@ -8,7 +7,10 @@ module.exports = class GrassEater extends livingCreature {
         this.directions = [];
         this.acted = false;
     }
-    
+    random(arr) {
+        var r = Math.floor(Math.random() * (arr.length));
+        return arr[r];
+    }
     getNewCoordinates() {
         this.directions = [
             [this.i - 1, this.j - 1],
@@ -22,18 +24,14 @@ module.exports = class GrassEater extends livingCreature {
         ];
     }
 
-    chooseCell(num) {
+    chooseCell(num, matrix) {
         this.getNewCoordinates();
-        return super.chooseCell(num);
+        return super.chooseCell(num, matrix);
     }
 
-    mul() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    mul(matrix) {
         
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.random(this.chooseCell(0, matrix));
 
 
         if (newCell) {
@@ -44,13 +42,9 @@ module.exports = class GrassEater extends livingCreature {
             this.energy = 8;
         }
     }
-    move() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    move(matrix) {
         
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.random(this.chooseCell(0, matrix));
 
         if (newCell) {
             this.energy--;
@@ -63,13 +57,10 @@ module.exports = class GrassEater extends livingCreature {
 
         }
     }
-    eat() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    eat(matrix) {
+
         
-        var newCell = random(this.chooseCell(1));
+        var newCell = this.random(this.chooseCell(1, matrix));
         this.acted = true;
         if (this.energy == 0) {
             matrix[this.i][this.j] = 0;
@@ -84,7 +75,7 @@ module.exports = class GrassEater extends livingCreature {
 
             this.energy++;
         } else {
-            this.move();
+            this.move(matrix);
         }
     }
 }

@@ -1,5 +1,4 @@
 
-var matrix = require("./matrix");
 module.exports = class Hunter {
     constructor(i, j, index) {
         this.i = i;
@@ -7,7 +6,12 @@ module.exports = class Hunter {
         this.index = index;
         this.directions = [];
     }
-    getNewCoordinates() {
+
+    random(arr) {
+        var r = Math.floor(Math.random() * (arr.length));
+        return arr[r];
+    }
+    getNewCoordinates(matrix) {
         var j = 1;
         while(j < matrix[0].length)
         {
@@ -16,8 +20,8 @@ module.exports = class Hunter {
         }
 
     }
-    chooseCell(num, num2) {
-        this.getNewCoordinates();
+    chooseCell(num, num2, matrix) {
+        this.getNewCoordinates(matrix);
         var found = [];
         for (var k in this.directions) {
             var i = this.directions[k][0];
@@ -32,13 +36,9 @@ module.exports = class Hunter {
         }
         return found;
     }
-    shoot() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    shoot(matrix) {
         
-        var newCell = random(this.chooseCell(3, 4));
+        var newCell = this.random(this.chooseCell(3, 4, matrix));
 
         if (newCell) {
             var I = newCell[0];

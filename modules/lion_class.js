@@ -1,4 +1,4 @@
-var matrix = require("./matrix");
+
 module.exports = class Lion {
     constructor(i, j, index) {
         this.i = i;
@@ -39,8 +39,12 @@ module.exports = class Lion {
 
         ];
     }
+    random(arr) {
+        var r = Math.floor(Math.random() * (arr.length));
+        return arr[r];
+    }
 
-    chooseCell(num, num2) {
+    chooseCell(num, num2, matrix) {
         this.getNewCoordinates();
         var found = [];
         for (var k in this.directions) {
@@ -57,13 +61,9 @@ module.exports = class Lion {
         return found;
     }
 
-    eat() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    eat(matrix) {
         
-        var newCell = random(this.chooseCell(2, 3));
+        var newCell = this.random(this.chooseCell(2, 3, matrix));
         this.acted = true;
 
         if (newCell) {
@@ -80,16 +80,12 @@ module.exports = class Lion {
                 this.hunt = 0;
             }
         } else {
-            this.move();
+            this.move(matrix);
         }
     }
-    move() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    move(matrix) {
         
-        var newCell = random(this.chooseCell(0, 1));
+        var newCell = this.random(this.chooseCell(0, 1, matrix));
 
         if (newCell) {
             var newI = newCell[0];
@@ -100,15 +96,11 @@ module.exports = class Lion {
             this.i = newI;
         }
     }
-    waalk() {
-        function random(arr) {
-            var r = Math.floor(Math.random() * (arr.length));
-            return arr[r];
-        }
+    waalk(matrix) {
         
         this.acted = true;
         this.walk++;
-        var newCell = random(this.chooseCell(0, 1));
+        var newCell = this.random(this.chooseCell(0, 1, matrix));
         if (newCell && this.walk > 2) {
             var newI = newCell[0];
             var newJ = newCell[1];

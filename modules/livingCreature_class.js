@@ -1,5 +1,3 @@
-//var matrix = require("./matrix");
-
 module.exports = class LivingCreature {
     constructor(i, j, index) {
         this.i = i;
