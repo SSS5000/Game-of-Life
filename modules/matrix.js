@@ -6,15 +6,25 @@ var Hunter = require("./hunter_class");
 
 var matrix = [];
 
-var n = 10;
-var lion = 0;
+
+function random(arr) {
+    var r = Math.floor(Math.random() * (arr.length));
+    return arr[r];
+}
+
+var n = 20;
 for (var i = 0; i < n; i++) {
     matrix[i] = [];
     for (var j = 0; j < n; j++) {
-        matrix[i][j] = Math.floor(Math.random() * (4));
+        matrix[i][j] = 
+        random([0,0,0,0,0,0,0,0,0,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            2,2,2,2,2,2,2,
+            3,3,3]);
 
     }
 }
+
 
 matrix[Math.floor(Math.random() * (n))][0] = 5
 

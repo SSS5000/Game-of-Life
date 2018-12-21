@@ -10,9 +10,12 @@ function setup() {
 
     socket.on("firstMatrix", function(mtx){
         matrix = mtx;
-        createCanvas(matrix[0].length * side + 1, matrix.length * side + 1);
+        createCanvas(10000, matrix.length * side + 1);
 
-        socket.on("redraw")
+        socket.on("redraw", function (mtx) {
+           matrix = mtx;
+           redraw(); 
+        });
 
         //HETO JNJEL
 
@@ -41,9 +44,8 @@ function setup() {
         }*/
 
     });
-    background('#acacac');
     noLoop();
-
+    
 }
 
 
@@ -54,6 +56,7 @@ function setup() {
 
 
 function draw() {
+    background('#acacac');
     
     for (var i = 0; i < matrix.length; i++) {
         for (var j = 0; j < matrix[i].length; j++) {
@@ -78,4 +81,19 @@ function draw() {
             }
         }
     }
+
+    line(400,50,2500,50);
+    line(600,500,600,0);
+    line(900,500,900,0);
+    textSize(20);
+    fill("lightgreen");
+    text("Grass",450,80);
+    fill("yellow");
+    text("GrassEater",450,120);
+    fill('red');
+    text("Predator",450,160);
+    fill('black');
+    text("Lion",450,200);
+    fill("darkgreen");
+    text("Hunter",450,240)
 }
